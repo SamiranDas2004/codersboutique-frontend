@@ -2,8 +2,12 @@ import { NextResponse } from "next/server";
 import { verifyJoseToken } from "./app/lib/jose";
 
 export async function middleware(req) {
+    console.log('middleware')
+    console.log('env', process.env.NEXT_PUBLIC_SECRETKEY)
     const token = req.cookies.get("token")?.value;
+    console.log('token', token)
     const verify = await verifyJoseToken(token);
+    console.log('veriffdy', verify)
 
     // Protect main pages
     if (!verify && req.nextUrl.pathname.startsWith("/pages/dashboard")) {
