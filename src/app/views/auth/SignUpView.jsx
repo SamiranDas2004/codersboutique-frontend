@@ -15,6 +15,12 @@ export default function SignUp() {
         setLoading(true);
         if (!name || !email || !password) {
             toast.error('Please fill all the fields');
+            setLoading(false)
+            return;
+        }
+        if (!/^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+            toast.error('Invalid Email');
+            setLoading(false)
             return;
         }
         try {
