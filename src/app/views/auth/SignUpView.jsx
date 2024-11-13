@@ -23,6 +23,9 @@ export default function SignUp() {
             });
             const data = response.data;
             toast.success(data?.message);
+            setEmail('')
+            setName('')
+            setPassword('')
         }
         catch (err) {
             console.log({ err })
