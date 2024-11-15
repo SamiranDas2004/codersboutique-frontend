@@ -63,7 +63,6 @@ export default function SignUp() {
                     {
                         loading ? null :
                             <Link style={{ marginTop: '3px', textDecoration: 'none' }} href="/"> Already have an account?
-                                {/* <Button component="a" sx={{ my: 1, ml: 2 }} color="primary">Already have account?</Button> */}
                             </Link>
                     }
                 </Box>

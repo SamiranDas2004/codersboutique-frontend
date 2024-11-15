@@ -8,7 +8,7 @@ export const getCandidates = createAsyncThunk('candidates/getCandidates', async 
         const startDate = params.startDate ? `${params.startDate.getFullYear()}-${params.startDate.getMonth() + 1}-${params.startDate.getDate()}` : ''
         const endDate = params.endDate ? `${params.endDate.getFullYear()}-${params.endDate.getMonth() + 1}-${params.endDate.getDate()}` : ''
 
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_API}/api/v1/candidate/?page=1&limit=10&name=${params.name}&status=${params.status}&startDate=${startDate}&endDate=${endDate}`, {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_API}/api/v1/candidate/?page=${params.page}&limit=${params.limit}&name=${params.name}&status=${params.status}&startDate=${startDate}&endDate=${endDate}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -66,6 +66,8 @@ const candidateSlice = createSlice({
     name: "candidate",
     initialState: {
         candidate: [],
+        totalPages: 0,
+        totalCandidates: 0,
         loading: false,
         error: null
     },
@@ -76,6 +78,8 @@ const candidateSlice = createSlice({
         builder.addCase(getCandidates.fulfilled, (state, action) => {
             state.loading = false;
             state.candidate = action.payload.data;
+            state.totalPages = action.payload.pagination.totalPages;
+            state.totalCandidates = action.payload.pagination.totalCandidates;
         })
         builder.addCase(getCandidates.rejected, (state, action) => {
             state.loading = false;
@@ -106,6 +110,7 @@ const candidateSlice = createSlice({
         builder.addCase(addCandidate.fulfilled, (state, action) => {
             state.loading = false;
             state.candidate.unshift(action.payload.data);
+            state.totalCandidates = state.totalCandidates + 1;
         })
         builder.addCase(addCandidate.rejected, (state, action) => {
             state.loading = false;

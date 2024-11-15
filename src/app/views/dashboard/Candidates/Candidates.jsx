@@ -13,14 +13,9 @@ export default function CandidatesData() {
     const [open, setOpen] = React.useState(false);
     const [edit, setEdit] = React.useState(false);
     const [selectedCandidate, setSelectedCandidate] = React.useState(null)
+    const [page, setPage] = React.useState(0);
 
     const [openBackDrop, setOpenBackDrop] = React.useState(false);
-    const handleCloseBackDrop = () => {
-        setOpenBackDrop(false);
-    };
-    const handleOpenBackDrop = () => {
-        setOpenBackDrop(true);
-    };
 
     const handleOpen = () => setOpen(true);
     const handleClose = (event, reason) => {
@@ -29,13 +24,13 @@ export default function CandidatesData() {
         setSelectedCandidate(null)
     }
 
-    const { candidate, loading } = useSelector(state => state.candidate)
+    const { candidate, loading, totalPages, totalCandidates } = useSelector(state => state.candidate)
     const search = useSelector(state => state.search)
     const dispatch = useDispatch()
 
     React.useEffect(() => {
-        dispatch(getCandidates(search))
-    }, [dispatch, search])
+        dispatch(getCandidates({ ...search, page: page + 1, limit: 10 }))
+    }, [dispatch, page, search])
 
     React.useEffect(() => {
         if (loading) setOpenBackDrop(true)
@@ -75,7 +70,9 @@ export default function CandidatesData() {
         },
     ];
 
-    const paginationModel = { page: 0, pageSize: 10 };
+    const paginationModel = { page, pageSize: 10 };
+
+    console.log({ page, totalPages, totalCandidates })
 
     return (
         <>
@@ -84,12 +81,16 @@ export default function CandidatesData() {
                     rows={candidate && candidate?.length > 0 ? candidate : []}
                     columns={columns}
                     initialState={{ pagination: { paginationModel } }}
-                    pageSizeOptions={[5, 10]}
+                    pageSizeOptions={[10]}
+                    onPaginationModelChange={newPage => setPage(newPage.page)}
                     sx={{ border: 0 }}
+                    rowCount={totalCandidates}
+                    loading={loading}
+                    paginationMode='server'
                 />
             </Paper>
             <Modal open={open} handleClose={handleClose} selectedCandidate={selectedCandidate} flag={edit} />
-            <SimpleBackdrop open={openBackDrop} />
+            {/* <SimpleBackdrop open={openBackDrop} /> */}
         </>
     );
 }
