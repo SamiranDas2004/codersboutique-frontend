@@ -31,3 +31,11 @@ This project is a Candidates Management Dashboard built using **Next.js** and **
 This Candidates Management Dashboard provides a robust solution for managing candidate data with a focus on user experience and performance. The combination of Next.js, Material-UI, and Redux allows for a scalable and maintainable codebase.
 
 ## HostedLink- https://codersboutique-frontend.vercel.app/
+
+
+
+![Screenshot 2024-12-06 204732](https://github.com/user-attachments/assets/a106ad7e-ea8f-405c-bd79-e4b7206cc5be)
+
+![Screenshot 2024-12-06 204714](https://github.com/user-attachments/assets/76d9ce8a-6169-41ac-9b83-90e0e57d4e6b)
+
+![Screenshot 2024-12-06 204647](https://github.com/user-attachments/assets/979c306d-72cf-4fa2-bb02-5be5200e6e70)
