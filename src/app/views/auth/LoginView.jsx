@@ -128,7 +128,7 @@ export default function Login() {
                             color="textSecondary"
                             textAlign="center"
                         >
-                            Don't have an account?{' '}
+                            Don&apos;t have an account?{' '}
                             <Link
                                 href="/pages/auth/signup"
                                 style={{
