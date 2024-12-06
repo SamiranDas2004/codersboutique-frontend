@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -14,7 +14,7 @@ export default function MenuAppBar() {
     const [auth, setAuth] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState(null);
 
-    const router = useRouter()
+    const router = useRouter();
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -23,6 +23,7 @@ export default function MenuAppBar() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
     const handleLogout = () => {
         setAnchorEl(null);
         document.cookie = 'token=; Max-Age=0; path=/;';
@@ -31,9 +32,17 @@ export default function MenuAppBar() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+            <AppBar position="static" sx={{ backgroundColor: '#000' }}>
                 <Toolbar>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    <Typography
+                        variant="h4" // Updated from "h6" to "h4" for larger text
+                        component="div"
+                        sx={{
+                            flexGrow: 1,
+                            fontSize: '2rem', // Explicitly set font size
+                            fontWeight: 'bold', // Optionally make it bold for emphasis
+                        }}
+                    >
                         Dashboard
                     </Typography>
                     {auth && (
