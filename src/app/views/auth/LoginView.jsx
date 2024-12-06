@@ -31,7 +31,7 @@ export default function Login() {
 
             toast.success(data?.message);
 
-            router.push('/pages/dashboard');
+            router.push('https://codersboutiqueassignment.netlify.app/pages/dashboard');
         } catch (err) {
             if (err?.response && err?.response?.data)
                 toast.error(err?.response?.data?.message);
